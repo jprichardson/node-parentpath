@@ -12,6 +12,10 @@ TEST_DIR = '', DIRS = [];
 
 var pj = path.join;
 
+function ridx() {
+    return DIRS[Math.floor(Math.random() * DIRS.length)];
+}
+
 describe('parentpath', function(){
     
     beforeEach(function(done) {
@@ -21,7 +25,7 @@ describe('parentpath', function(){
             console.log('HI: ' + TEST_DIR)
         }
 
-        TEST_DIR = path.resolve(TEST_DIR)
+        TEST_DIR = '/tmp/mynewblog' //path.resolve(TEST_DIR)
 
         var dirs = [];
         dirs[0] = pj(TEST_DIR, 'potter')
@@ -53,14 +57,21 @@ describe('parentpath', function(){
             },
             createFiles: function() {
                 var self = this;
-                batch(files).par().each(function(i, file, done){ fs.writeFile(file, done); }).end(function(){ done(); });
+                batch(files).par().each(function(i, file, done){ fs.writeFile(file, done); }).end(function(){ self.next(); });
+            },
+            done: function() {
+                process.chdir('/tmp')
+                exec('tree  ' + '/tmp', function(err, stdout, stderr) {
+                    console.log(stdout);
+                    process.exit();
+                });
             }
         });
     })
 
 
     it('should find the path of a parent dir', function(done){
-        process.chdir(DIRS[3]);        
+        process.chdir(ridx());        
         parent.find('potter/').end(function(dir) {
             if (dir) {
                 if (S(dir).startsWith('/private/tmp')) { //MAC OS X symlinks /tmp to /private/tmp
@@ -76,7 +87,7 @@ describe('parentpath', function(){
 
 
     it('should find the path of a parent path', function(done) {
-        process.chdir(DIRS[3]);
+        process.chdir(ridx());
          parent.find('potter/potter.json').end(function(dir) {
             if (dir) {
                 if (S(dir).startsWith('/private/tmp')) { //MAC OS X symlinks /tmp to /private/tmp
@@ -90,7 +101,7 @@ describe('parentpath', function(){
     })
 
     it('should return null if the parent path cant be found', function(done) {
-        process.chdir(DIRS[3]);
+        process.chdir(ridx());
          parent.find('potter/per.json').end(function(dir) {
             assert(dir === null);
             done();
