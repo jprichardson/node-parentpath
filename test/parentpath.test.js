@@ -22,10 +22,9 @@ describe('parentpath', function(){
         TEST_DIR = testutil.generateTestPath('test-parentpath');
         if (S(TEST_DIR).startsWith('/private/tmp')) { //MAC OS X symlinks /tmp to /private/tmp
             TEST_DIR = TEST_DIR.replace('/private', '');
-            console.log('HI: ' + TEST_DIR)
         }
 
-        TEST_DIR = '/tmp/mynewblog' //path.resolve(TEST_DIR)
+        TEST_DIR = path.resolve(TEST_DIR);
 
         var dirs = [];
         dirs[0] = pj(TEST_DIR, 'potter')
