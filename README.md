@@ -1,7 +1,7 @@
 Node.js - parentpath
 ================
 
-Find a path in a parent directory.
+Find parent directory of a path.
 
 
 Why?
@@ -23,13 +23,11 @@ Installation
 Example
 ------
 
-**Note: I'm not quite happy with the API, so it should be considered unstable.**
-
 Let's say we have the following directory:
 
     /users/jp
     └── mynewblog
-        ├── potter
+        ├── sky
         │   ├── pages
         │   │   └── animals
         │   │       ├── animals.md
@@ -38,16 +36,16 @@ Let's say we have the following directory:
         │   │       └── reptiles
         │   │           └── snakes
         │   │               └── reptiles.md
-        │   └── potter.json
+        │   └── sky.json
         └── articles
             └── cool_article.md
 
 
 ```javascript
-var parent = require('parentpath')
-process.chdir('/users/jp/mynewblog/potter/pages/animals/repites');
-parent.find('potter').end(function(dir) {
-    console.log(dir); // = /users/jp/mynewblog
+var pp = require('parentpath')
+process.chdir('/users/jp/mynewblog/sky/pages/animals/repites');
+pp('sky', function(dir) {
+  console.log(dir); // = /users/jp/mynewblog
 });
 ```
 
@@ -55,9 +53,9 @@ Be a bit more precise if you want:
 
 ```javascript
 var parent = require('parentpath')
-process.chdir('/users/jp/mynewblog/potter/pages/animals/repites');
-parent.find('potter/potter.json').end(function(dir) {
-    console.log(dir); // = /users/jp/mynewblog
+process.chdir('/users/jp/mynewblog/sky/pages/animals/repites');
+parent('sky/sky.json', function(dir) {
+  console.log(dir); // = /users/jp/mynewblog
 });
 ```
 

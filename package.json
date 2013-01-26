@@ -1,7 +1,7 @@
 {
   "name": "parentpath",
-  "version": "0.0.1",
-  "description": "Find a path in a parent directory.",
+  "version": "0.1.0",
+  "description": "Find parent directory of a path.",
   "homepage": [
     ""
   ],
@@ -17,19 +17,17 @@
       "url": ""
     }
   ],
-  "dependencies": {
-    "testutil": "~0.4.0"
-  },
+  "dependencies": {},
   "main": "./lib/parentpath.js",
   "scripts": {
     "test": "mocha test"
   },
   "devDependencies": {
-    "testutil": "~0.2.2",
-    "fs-extra": "~0.1.3",
-    "path-extra": "0.0.x",
-    "batchflow": "0.0.3",
-    "nextflow": "~0.2.3",
-    "string": "~1.2.0"
+    "string": "~1.2.0",
+    "autoresolve": "0.0.3",
+    "walker": "~1.0.3",
+    "testutil": "~0.4.0",
+    "fs-extra": "~0.3.2",
+    "mocha": "*"
   }
 }
