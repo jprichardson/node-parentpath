@@ -5,9 +5,10 @@ var fs = require('fs-extra')
   , batch = require('batchflow')
   , next = require('nextflow') 
   , S = require('string')
-  , exec = require('child_process').exec;
+  , exec = require('child_process').exec
 
-TEST_DIR = '', DIRS = [];
+var TEST_DIR = ''
+  , DIRS = [];
 
 var pj = path.join;
 
@@ -97,11 +98,18 @@ describe('parentpath', function(){
   })
 
   it('should find the animals file', function(done) {
-    process.chdir(ridx())
+    var snakeDir = ''
+    DIRS.forEach(function(d) {
+      if (S(d).endsWith(d))
+        snakeDir = d
+    })
+    if (!snakeDir) done(new Error('Cant find snake dir.'))
+
+    process.chdir(snakeDir)
     parent.find('animals.md').end(function(dir) {
       dir = removePrivate(dir)
       
-      EQ (dir, TEST_DIR);
+      EQ (dir, path.join(TEST_DIR, 'potter/pages/animals'))
       done();
     })
   })

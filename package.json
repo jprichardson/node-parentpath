@@ -29,6 +29,7 @@
     "fs-extra": "~0.1.3",
     "path-extra": "0.0.x",
     "batchflow": "0.0.3",
-    "nextflow": "~0.2.3"
+    "nextflow": "~0.2.3",
+    "string": "~1.2.0"
   }
 }
