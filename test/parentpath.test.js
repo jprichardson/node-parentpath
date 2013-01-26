@@ -15,12 +15,18 @@ function ridx() {
   return DIRS[Math.floor(Math.random() * DIRS.length)];
 }
 
+function removePrivate(dir) {
+  if (dir === null) return null
+
+  if (dir.indexOf('/private/tmp') === 0)  //MAC OS X symlinks /tmp to /private/tmp
+    dir = dir.replace('/private', '');
+  return dir
+}
+
 describe('parentpath', function(){
   beforeEach(function(done) {
-    TEST_DIR = testutil.generateTestPath('test-parentpath');
-    if (S(TEST_DIR).startsWith('/private/tmp')) { //MAC OS X symlinks /tmp to /private/tmp
-      TEST_DIR = TEST_DIR.replace('/private', '');
-    }
+    TEST_DIR = testutil.createTestDir('parentpath');
+    TEST_DIR = removePrivate(TEST_DIR)
 
     TEST_DIR = path.resolve(TEST_DIR);
     //console.log(TEST_DIR)
@@ -72,12 +78,8 @@ describe('parentpath', function(){
   it('should find the path of a parent dir', function(done){
     process.chdir(ridx());        
     parent.find('potter/').end(function(dir) {
-      if (dir) {
-        if (S(dir).startsWith('/private/tmp')) { //MAC OS X symlinks /tmp to /private/tmp
-          dir = dir.replace('/private', '');
-        }
-      }
-
+      dir = removePrivate(dir)
+      
       EQ (dir, TEST_DIR);
       done();
     })
@@ -86,12 +88,8 @@ describe('parentpath', function(){
 
   it('should find the path of a parent path', function(done) {
     process.chdir(ridx());
-     parent.find('potter/potter.json').end(function(dir) {
-      if (dir) {
-        if (S(dir).startsWith('/private/tmp')) { //MAC OS X symlinks /tmp to /private/tmp
-          dir = dir.replace('/private', '');
-        }
-      }
+    parent.find('potter/potter.json').end(function(dir) {
+      dir = removePrivate(dir)
 
       EQ (dir, TEST_DIR);
       done();
@@ -101,12 +99,8 @@ describe('parentpath', function(){
   it('should find the animals file', function(done) {
     process.chdir(ridx())
     parent.find('animals.md').end(function(dir) {
-      if (dir) {
-        if (S(dir).startsWith('/private/tmp')) { //MAC OS X symlinks /tmp to /private/tmp
-          dir = dir.replace('/private', '');
-        }
-      }
-
+      dir = removePrivate(dir)
+      
       EQ (dir, TEST_DIR);
       done();
     })
