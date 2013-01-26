@@ -1,5 +1,4 @@
-var assert = require('assert')
-  , fs = require('fs-extra')
+var fs = require('fs-extra')
   , parent = require('../lib/parentpath')
   , path = require('path-extra')
   , testutil = require('testutil')
@@ -24,6 +23,7 @@ describe('parentpath', function(){
     }
 
     TEST_DIR = path.resolve(TEST_DIR);
+    //console.log(TEST_DIR)
 
     var dirs = [];
     dirs[0] = pj(TEST_DIR, 'potter')
@@ -59,11 +59,11 @@ describe('parentpath', function(){
       },
       done: function() {
           process.chdir('/tmp')
-          exec('tree  ' + '/tmp', function(err, stdout, stderr) {
+          /*exec('tree  ' + '/tmp', function(err, stdout, stderr) {
               console.log(stdout);
               process.exit();
-          });
-          //done()
+          });*/
+          done()
       }
     });
   })
@@ -78,7 +78,7 @@ describe('parentpath', function(){
         }
       }
 
-      assert(dir === TEST_DIR);
+      EQ (dir, TEST_DIR);
       done();
     })
   })
@@ -93,7 +93,7 @@ describe('parentpath', function(){
         }
       }
 
-      assert(dir === TEST_DIR);
+      EQ (dir, TEST_DIR);
       done();
     })
   })
@@ -107,7 +107,7 @@ describe('parentpath', function(){
         }
       }
 
-      assert(dir === TEST_DIR);
+      EQ (dir, TEST_DIR);
       done();
     })
   })
@@ -115,7 +115,7 @@ describe('parentpath', function(){
   it('should return null if the parent path cant be found', function(done) {
     process.chdir(ridx());
     parent.find('potter/per.json').end(function(dir) {
-      assert(dir === null);
+      EQ (dir, null);
       done();
     })
   })

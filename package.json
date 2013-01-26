@@ -18,7 +18,8 @@
     }
   ],
   "dependencies": {
-    "string": "~0.2.1-2"
+    "string": "~0.2.1-2",
+    "testutil": "~0.4.0"
   },
   "main": "./lib/parentpath.js",
   "scripts": {
