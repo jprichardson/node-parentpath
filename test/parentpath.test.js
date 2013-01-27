@@ -107,6 +107,18 @@ describe('parentpath', function(){
       done();
     })
   })
+
+  it('should match the current directory too', function(done) {
+    var file = path.join(TEST_DIR, 'sky', 'config.json')
+    fs.touchSync(file)
+
+    process.chdir(TEST_DIR)
+    pp('sky/config.json', function(dir) {
+      dir = removePrivate(dir)
+      EQ (dir, TEST_DIR)
+      done()
+    })
+  })
 })
 
 

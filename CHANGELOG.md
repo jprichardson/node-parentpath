@@ -1,3 +1,7 @@
+0.1.1 / 2013-01-27
+------------------
+* Fixed bug for match in current directory.
+
 0.1.0 / 2013-01-26
 ------------------
 * Refactored tests.
