@@ -1,7 +1,8 @@
 0.2.0 / 2013-03-22
 ------------------
 * added Travis-CI
-
+* added sync version
+* verified Node `v0.10` support
 
 0.1.1 / 2013-01-27
 ------------------
