@@ -1,3 +1,8 @@
+0.2.0 / 2013-03-22
+------------------
+* added Travis-CI
+
+
 0.1.1 / 2013-01-27
 ------------------
 * Fixed bug for match in current directory.

@@ -1,6 +1,8 @@
 Node.js - parentpath
 ================
 
+[![build status](https://secure.travis-ci.org/jprichardson/node-parentpath.png)](http://travis-ci.org/jprichardson/node-parentpath)
+
 Find parent directory of a path.
 
 
