@@ -96,7 +96,7 @@ describe('parentpath / sync', function(){
 
   it('should match the current directory too', function() {
     var file = path.join(TEST_DIR, 'sky', 'config.json')
-    fs.touchSync(file)
+    fs.createFileSync(file)
 
     process.chdir(TEST_DIR)
     var dir = removePrivate(ppSync('sky/config.json'))

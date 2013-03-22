@@ -110,7 +110,7 @@ describe('parentpath', function(){
 
   it('should match the current directory too', function(done) {
     var file = path.join(TEST_DIR, 'sky', 'config.json')
-    fs.touchSync(file)
+    fs.createFileSync(file)
 
     process.chdir(TEST_DIR)
     pp('sky/config.json', function(dir) {
